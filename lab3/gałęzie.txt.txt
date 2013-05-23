@@ -1,0 +1,46 @@
+ zasady dzia³ania ga³êzi w systemie git
+
+Wed³ug konwencji, lokalny aktualny katalog roboczy w gicie jest nazywany "master". To jest po prostu nazwa 
+ga³êzi, któr¹ git tworzy, kiedy zaczniesz puste repozytorium. Mo¿esz j¹ usun¹æ jeœli nie podoba Ci siê nazwa.
+Jeœli tworzysz swoje repozytorium przez klonowanie czyjegoœ repozytorium, zdalna ga³¹Ÿ "master" jest kopiowana 
+na lokaln¹ ga³¹Ÿ nazwan¹ "origin". Mo¿esz mieæ swoj¹ w³asn¹ ga³¹Ÿ "master", która nie jest przywi¹zana do 
+zdalnego repozytorium.
+Istnieje zawsze aktualna g³owica, zwana HEAD. (Aktualnie jest to link symboliczny, .git/HEAD, do pliku takiego 
+jak refs/heads/master.) Git wymaga aby to zawsze wskazywa³o do katalogu refs/heads.
+Stworzenie ga³êzi
+
+git checkout [-f|-m] -b <ga³¹Ÿ> [wersja]
+stworzy i prze³¹czy do nowej ga³êzi o podanej nazwie. To jest odpowiednik do
+git branch <ga³¹Ÿ> [<wersja>]
+git checkout [-f|-m] <ga³¹Ÿ>
+Jeœli <wersja> jest pominiêta, domyœlnie jest G£OWICA, a w takim wypadku ¿adne pliki katalogu roboczego nie 
+bêd¹ zmienione.
+To jest typowy sposób wypuszczenia wersji, która nie posiada istniej¹cej g³owicy wskazuj¹cej na ni¹.
+[edytuj]Kasowanie ga³êzi
+
+"git branch -d <g³owica>" jest bezpieczne. Kasuje podan¹ <g³owicê>, ale najpierw sprawdza, czy zatwierdzenie 
+jest osi¹galne w inny sposób. To znaczy scali³eœ gdzieœ ga³¹Ÿ lub nigdy nie robi³eœ edycji na tej ga³êzi.
+To dobry sposób na stworzenie "tematycznej ga³êzi" kiedy pracujesz nad czymœ wiêkszym ni¿ jednolinijkowiec, ale 
+powinno siê usuwaæ je gdy skoñczysz. Nadal pozostaje w historii.
+
+
+HEAD
+HEAD zwyk³ byæ Uniksowym symlinkiem, i nadal mo¿e byæ tak postrzegany, ale aby obs³ugiwaæ systemy firmy 
+Microsoft, to jest teraz tym co jest nazywane "symboliczna referencja" lub symref i jest prostym plikiem 
+zawieraj¹cym "ref: refs/heads/master". Git traktuje to tak jak symlink. Istnieje pomocnik git-update-ref, który 
+je zapisuje.
+Podczas gdy HEAD musi wskazywaæ na refs/heads, legalnym jest wskazywanie na nieistniej¹cy plik. To w³aœnie siê 
+dzieje przed pierwszym zatwierdzeniem w ca³kowicie nowym repozytorium.
+
+nazywa domyœlnej ga³êzi rozwoju w systemie git;MASTER
+  
+wypisz polecenia git zwi¹zane z ga³êziami i prac¹ na nich:
+
+git checkout [-f|-m] <gal¹Ÿ> prze³¹czenie na inn¹ g³owice
+
+git branch <ga³¹Ÿ> [<wersja>]Stworzenie ga³êzi
+git checkout [-f|-m] <ga³¹Ÿ>
+git reset --soft <g³owica>\-nadpisuje ga³¹Ÿ zawartosci¹ <g³owica>
+git reset --mixed [<g³owica>]-nadpisujemy i kopiujemy do indeksu
+git reset --hard [<g³owica>]-napisuje kopiuje do indeksu i uaktualnia katalog 
+"git branch -d <g³owica>"-kasowanie ga³êzi
